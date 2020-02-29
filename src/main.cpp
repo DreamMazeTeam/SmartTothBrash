@@ -6,22 +6,22 @@
 #include <Arduino.h>
 #endif
 
-#include <EEPROM.h>
-
 // Для отладки
-//#define DB_SERIAL
+#define DB_SERIAL
 #ifdef DB_SERIAL
 uint16_t DELAY = 1000;
 uint16_t TIMER = 0;
 #endif
 
+
+
 // Пины
-#define GL_PIN_UP 0
-#define GL_PIN_DOWN 0
-#define GR_PIN_UP 0
+#define GL_PIN_UP 4
+#define GL_PIN_DOWN 3
+#define GR_PIN_UP 2
 #define GR_PIN_DOWN 0
-#define ENGINE_LEFT 0
-#define ENGINE_RIGHT 0
+#define ENGINE_LEFT 11
+#define ENGINE_RIGHT 10
 
 
 // Чуть чуть редефов
@@ -37,6 +37,15 @@ const int GYRO_PINS[GYRO_PINS_COUNT] = {
     G_PIN_180,
 //    GR_PIN_DOWN
 };
+int GYRO_STATES[GYRO_PINS_COUNT];
+int mpart = -1;
+
+void updateGyroState()
+{
+    for (int i = 0; i < GYRO_PINS_COUNT; i++){
+        GYRO_STATES[i] = digitalRead(GYRO_PINS[i]); 
+    }
+}
 
 
 enum class Direction{ No, Left, Right, _count };
@@ -69,7 +78,18 @@ void setEngineDirection(Direction dir) {
 
 Direction getDirectionFromGyroState()
 {
-    // Логику поворота щетки относительно данных из GYRO_PINS
+    if (GYRO_STATES[0] == 1 and GYRO_STATES[1] == 0 and GYRO_STATES[2] == 1){
+        return Direction::Right;
+    }
+    else if (GYRO_STATES[0] == 0 and GYRO_STATES[1] == 1 and GYRO_STATES[2] == 1){
+        return Direction::Left;
+    }
+    else if (GYRO_STATES[0] == 1 and GYRO_STATES[1] == 0 and GYRO_STATES[2] == 0){
+        return Direction::Right;
+    }
+    else if (GYRO_STATES[0] == 0 and GYRO_STATES[1] == 1 and GYRO_STATES[2] == 0){
+        return Direction::Left;
+    }
     return Direction::No;
 }
 
@@ -79,7 +99,7 @@ void db_print()
 {
     Serial.print("Состояние гироскопа: \t");
     for (int i = 0; i < GYRO_PINS_COUNT; i++){
-        Serial.print(GYRO_PINS[i]);
+        Serial.print(GYRO_STATES[i]);
         Serial.print("\t");
     }
 
@@ -104,18 +124,26 @@ void setup()
 
     pinMode(ENGINE_LEFT, OUTPUT);
     pinMode(ENGINE_RIGHT, OUTPUT);
+    updateGyroState();
 
     EngineDirection = getDirectionFromGyroState();
     setEngineDirection(EngineDirection);
+    setEngineDirection(Direction::No);
 }
 
 
 void loop() 
 {
+    updateGyroState();
+
 #ifdef DB_SERIAL
     if ((millis() - TIMER) >= DELAY) {
         TIMER = millis();
         db_print();
     }
 #endif
+
+    EngineDirection = getDirectionFromGyroState();
+    setEngineDirection(EngineDirection);
+
 }
