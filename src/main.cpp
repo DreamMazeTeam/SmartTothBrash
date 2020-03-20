@@ -2,9 +2,10 @@
 
 // Pins definations
 #define FLASK_X       5
-#define FLASK_Y       6
-#define ENGINE_LEFT  11
-#define ENGINE_RIGHT 10
+#define FLASK_Y       3
+#define ENGINE_LEFT  10
+#define ENGINE_RIGHT 9
+
 
 #define LEFT          0
 #define RIGHT         1
@@ -64,6 +65,12 @@ void setup()
     pinMode(ENGINE_RIGHT, OUTPUT);
     pinMode(FLASK_X, INPUT);
     pinMode(FLASK_Y, INPUT);
+    pinMode(6,OUTPUT);
+    digitalWrite(6,HIGH);
+    pinMode(2,OUTPUT);
+    digitalWrite(2,HIGH);
+
+
 }
 
 void tick()
