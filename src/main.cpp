@@ -27,8 +27,8 @@
 enum class Direction{ No, Left, Right, _count };
 Direction EngineDirection = Direction::No;
 
-uint8_t xFlask = LEFT;
-uint8_t yFlask = DOWN;
+int xFlask = LEFT;
+int yFlask = DOWN;
 
 void setEngineDirection(Direction dir)
 {
@@ -92,12 +92,12 @@ void setup()
 
 
 uint32_t timer = 0;
-uint8_t xPrev = xFlask;
-uint8_t yPrev = yPrev;
+int xPrev = xFlask;
+int yPrev = yPrev;
 void tick()
 {
-    uint8_t x = digitalRead(FLASK_X);
-    uint8_t y = digitalRead(FLASK_Y);
+    int x = digitalRead(FLASK_X);
+    int y = digitalRead(FLASK_Y);
 
     if (millis() - timer >= TICK){
 
