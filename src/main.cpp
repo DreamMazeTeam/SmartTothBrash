@@ -1,5 +1,6 @@
 #include <Arduino.h>
 
+// Pins definations
 #define FLASK_X       5
 #define FLASK_Y       6
 #define ENGINE_LEFT  11
@@ -10,6 +11,7 @@
 #define DOWN          0
 #define UP            1
 
+// Update flasks rate
 #define TICK        250
 
 enum class Direction{ No, Left, Right, _count };
