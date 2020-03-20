@@ -4,7 +4,7 @@
 #define FLASK_X       5
 #define FLASK_Y       3
 #define ENGINE_LEFT  10
-#define ENGINE_RIGHT 9
+#define ENGINE_RIGHT  9
 
 
 #define LEFT          0
@@ -14,6 +14,15 @@
 
 // Update flasks rate
 #define TICK        250
+#define DEBUG         1
+
+#if DEBUG == 1
+    #define println(x) Serial.println(x)
+    #define print(x) Serial.print(x)
+#else 
+    #define println(x)
+    #define print(x)
+#endif
 
 enum class Direction{ No, Left, Right, _count };
 Direction EngineDirection = Direction::No;
@@ -21,22 +30,28 @@ Direction EngineDirection = Direction::No;
 uint8_t xFlask = LEFT;
 uint8_t yFlask = DOWN;
 
-void setEngineDirection(Direction dir) {
+void setEngineDirection(Direction dir)
+{
+    print("Engines in pos ->");
+
     switch (dir)
     {
     case Direction::Left:
         digitalWrite(ENGINE_LEFT, HIGH);
         digitalWrite(ENGINE_RIGHT, LOW);
+        println("Left");
         break;
 
     case Direction::Right:
         digitalWrite(ENGINE_LEFT, LOW);
         digitalWrite(ENGINE_RIGHT, HIGH);
+        println("Right");
         break;
 
     case Direction::No:
         digitalWrite(ENGINE_LEFT, LOW);
         digitalWrite(ENGINE_RIGHT, LOW);
+        println("No");
         break;
     }
 }
@@ -70,7 +85,9 @@ void setup()
     pinMode(2,OUTPUT);
     digitalWrite(2,HIGH);
 
-
+#if DEBUG == 1
+    Serial.begin(9600);
+#endif
 }
 
 void tick()
