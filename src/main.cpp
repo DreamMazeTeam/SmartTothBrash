@@ -103,8 +103,10 @@ void tick()
 
         if (xPrev == x) xFlask = x;
         if (yPrev == y) yFlask = y;
-
+        
         timer = millis();
+
+        println("Tick");
     }
 
     xPrev = x;
