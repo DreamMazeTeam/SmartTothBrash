@@ -39,6 +39,18 @@ void setEngineDirection(Direction dir) {
 
 Direction getDirectionFromFlasks()
 {
+    if (xFlask == LEFT && yFlask == DOWN) {
+        return Direction::Left;
+    }
+    else if (xFlask == LEFT && yFlask == UP) {
+        return Direction::Right;
+    }
+    else if (xFlask == RIGHT && yFlask == DOWN) {
+        return Direction::Left;
+    }
+    else if (xFlask == RIGHT && yFlask == UP) {
+        return Direction::Right;
+    }
     return Direction::No;
 }
 
