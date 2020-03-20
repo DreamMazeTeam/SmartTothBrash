@@ -4,10 +4,12 @@
 #define FLASK_Y       6
 #define ENGINE_LEFT  11
 #define ENGINE_RIGHT 10
+
 #define LEFT          0
 #define RIGHT         1
 #define DOWN          0
 #define UP            1
+
 #define TICK        250
 
 enum class Direction{ No, Left, Right, _count };
