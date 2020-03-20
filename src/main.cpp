@@ -13,7 +13,7 @@
 #define UP            1
 
 // Update flasks rate
-#define TICK        250
+#define TICK         10
 #define DEBUG         1
 
 #if DEBUG == 1
@@ -90,12 +90,12 @@ void setup()
 #endif
 }
 
+
+uint32_t timer = 0;
+uint8_t xPrev = xFlask;
+uint8_t yPrev = yPrev;
 void tick()
 {
-    static uint32_t timer = 0;
-    static uint8_t xPrev = xFlask;
-    static uint8_t yPrev = yPrev;
-
     uint8_t x = digitalRead(FLASK_X);
     uint8_t y = digitalRead(FLASK_Y);
 
