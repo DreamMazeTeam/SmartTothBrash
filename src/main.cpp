@@ -7,7 +7,7 @@
 #endif
 
 // Для отладки
-#define DB_SERIAL
+//#define DB_SERIAL
 #ifdef DB_SERIAL
 uint16_t DELAY = 1000;
 uint16_t TIMER = 0;
