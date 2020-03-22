@@ -1,10 +1,10 @@
 #include <Arduino.h>
 
 // Pins definations
-#define FLASK_X       5
-#define FLASK_Y       3
+#define FLASK_X       3
+#define FLASK_Y       7
 #define ENGINE_LEFT  10
-#define ENGINE_RIGHT  9
+#define ENGINE_RIGHT 11
 
 
 #define LEFT          0
