@@ -2,9 +2,9 @@
 
 // Pins definations
 #define FLASK_X       3
-#define FLASK_Y       7
+#define FLASK_Y       8
 #define ENGINE_LEFT  10
-#define ENGINE_RIGHT 11
+#define ENGINE_RIGHT 12
 
 
 #define LEFT          0
@@ -80,10 +80,11 @@ void setup()
     pinMode(ENGINE_RIGHT, OUTPUT);
     pinMode(FLASK_X, INPUT);
     pinMode(FLASK_Y, INPUT);
-    pinMode(6,OUTPUT);
-    digitalWrite(6,HIGH);
-    pinMode(2,OUTPUT);
-    digitalWrite(2,HIGH);
+    
+    pinMode(FLASK_X-1,OUTPUT);
+    digitalWrite(FLASK_X-1,HIGH);
+    pinMode(FLASK_Y-1,OUTPUT);
+    digitalWrite(FLASK_Y-1,HIGH);
 
 #if DEBUG == 1
     Serial.begin(9600);
@@ -98,6 +99,11 @@ void tick()
 {
     int x = digitalRead(FLASK_X);
     int y = digitalRead(FLASK_Y);
+
+    print("Flask x -> ");
+    println(x);
+    print("Flask y -> ");
+    println(y);
 
     if (millis() - timer >= TICK){
 
