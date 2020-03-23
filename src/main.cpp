@@ -66,10 +66,10 @@ Direction getDirectionFromFlasks()
         return Direction::Right;
     }
     else if (xFlask == RIGHT && yFlask == DOWN) {
-        return Direction::Left;
+        return Direction::Right;
     }
     else if (xFlask == RIGHT && yFlask == UP) {
-        return Direction::Right;
+        return Direction::Left;
     }
     return Direction::No;
 }
