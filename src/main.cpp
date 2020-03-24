@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 // Pins definations
-#define FLASK_X       6
+#define FLASK_X       5
 #define FLASK_Y       4
 #define ENGINE_LEFT  10
 #define ENGINE_RIGHT 12
@@ -82,8 +82,8 @@ void setup()
     pinMode(FLASK_Y, INPUT);
     pinMode(FLASK_Y-1, OUTPUT);
     digitalWrite(FLASK_Y-1, HIGH);
-    pinMode(FLASK_X-1, OUTPUT);
-    digitalWrite(FLASK_X-1, HIGH);
+    pinMode(FLASK_X+1, OUTPUT);
+    digitalWrite(FLASK_X+1, HIGH);
 
 #if DEBUG == 1
     Serial.begin(9600);
